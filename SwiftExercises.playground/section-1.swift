@@ -8,7 +8,8 @@ Strings
 
 func favoriteCheeseStringWithCheese(cheese: String) -> String {
     // WORK HERE
-    return cheese
+    
+    return "My favorite cheese is \(cheese)."
 }
 
 let fullSentence = favoriteCheeseStringWithCheese("cheddar")
@@ -20,13 +21,19 @@ Arrays & Dictionaries
 
 */
 
-let numberArray = [1, 2, 3, 4]
+var numberArray = [1, 2, 3, 4]
 // Add 5 to this array
 // WORK HERE
 
-let numberDictionary = [1 : "one", 2 : "two", 3 : "three", 4 : "four"]
+numberArray += [5]
+
+var numberDictionary = [1 : "one", 2 : "two", 3 : "three", 4 : "four"]
 // Add 5 : "five" to this dictionary
 // WORK HERE
+
+numberDictionary = [1 : "one", 2 : "two", 3 : "three", 4 : "four", 5: "five"]
+
+//or numberDictionary[5] = "five" but this creates an optional
 
 /*
 
@@ -37,8 +44,16 @@ Loops
 // Use a closed range loop to print 1 - 10, inclusively
 // WORK HERE
 
+for number in 1...10 {
+    println(number)
+}
+
 // Use a half-closed range loop to print 1 - 10, inclusively
 // WORK HERE
+
+for number in 1..<10 {
+    println(number)
+}
 
 let worf = [
     "name": "Worf",
@@ -58,7 +73,22 @@ let characters = [worf, picard]
 func favoriteDrinksArrayForCharacters(characters:Array<Dictionary<String, String>>) -> Array<String> {
     // return an array of favorite drinks, like ["prune juice", "tea, Earl Grey, hot"]
     // WORK HERE
-    return []
+    
+    var drinks : [String] = []
+    
+    for dictionary in characters {
+        
+        for (favoriteDrink, favoriteName) in dictionary {
+            
+            if favoriteDrink == "favorite drink" {
+                var drink = favoriteName
+                
+                drinks += [drink]
+            }
+        }
+    }
+    
+    return drinks
 }
 
 let favoriteDrinks = favoriteDrinksArrayForCharacters(characters)
@@ -77,6 +107,23 @@ let strings = ["milk", "eggs", "bread", "challah"]
 
 // WORK HERE - make your function and pass `strings` in
 
+func convertArrayToOneString(array : Array<String>) -> String {
+    
+    var newString = ""
+    
+    //This is just to make the code pretty
+    let semicolon = ";"
+    
+    for string in array {
+        newString += string + semicolon //I know I didn't need the variable semicolon and could have just put ";" but I didnt;
+    }
+    
+    return newString
+    
+}
+
+convertArrayToOneString(strings)
+
 let expectedOutput = "milk;eggs;bread;challah"
 
 /*
@@ -89,3 +136,18 @@ let cerealArray = ["Golden Grahams", "Cheerios", "Trix", "Cap'n Crunch OOPS! All
 
 // Use a closure to sort this array alphabetically
 // WORK HERE
+
+//Long version...
+var cereals = sorted(cerealArray, { (cerealA, cerealB) -> Bool in
+    return cerealA < cerealB
+})
+
+//Easier version of it is...
+var sortedCereals = sorted(cerealArray, <)
+
+
+
+
+
+
+
